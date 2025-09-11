@@ -5,7 +5,9 @@ Aim for a highscore, try to beat my personal best of 644 points!
 
 ## 🎮 **[PLAY THE GAME](https://nikiel54.github.io/space-shooter-game/)**
 
-*Click the link above to play in your browser!*
+*Click the link above to play in your browser!*  
+*Expected wait time ~15 seconds to load.*  
+*Can run on Desktop/mobile.*
 
 ## How to Play
 
