@@ -35,14 +35,12 @@ jobs:
     
     - name: Build with pygbag
       run: |
-        # Create output directory
-        mkdir -p dist
         
         # Build the game with pygbag
-        python -m pygbag /home/runner/work/space-shooter-game/space-shooter-game/main.py --width 800 --height 600 --name "SpaceShooter" --output dist/
+        python -m pygbag --build main.py
         
         # List contents to verify build
-        ls -la dist/
+        ls -la build/
     
     - name: Setup Pages
       uses: actions/configure-pages@v4
@@ -50,7 +48,7 @@ jobs:
     - name: Upload artifact
       uses: actions/upload-pages-artifact@v3
       with:
-        path: './dist'
+        path: './build'
 
   deploy:
     environment:
