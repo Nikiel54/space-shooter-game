@@ -6,7 +6,6 @@
 import pygame as pg
 import asyncio
 import random
-import time
 import math
 
 #######  ASSETS  #######
@@ -505,7 +504,13 @@ class Ship(pg.sprite.Sprite):
         
         self.draw_shield(Screen, Health)
     
-
+    def reset(self):
+        self.rect.center = (360, 580)
+        self.powers = {}
+        self.last_shot = 0
+        self.move_speed = 6
+        self.doubleshot_on = False
+    
         
 class Broken_Asteroid(pg.sprite.Sprite):
     '''
@@ -524,10 +529,10 @@ def reset_game(Spaceship, Asteroids, Lasers, Score, Health, Giftboxes):
     Resets the current game by cleaning all game objects
         and resetting score.
     '''
-    Spaceship.rect.center = (360, 580)
+    Score = 0
+    Spaceship.reset()
     Asteroids.reset()
     Lasers.reset()
-    Score = 0
     Health.reset()
     Giftboxes.reset()
     return Spaceship, Asteroids, Lasers, Score, Health, Giftboxes

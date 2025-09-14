@@ -1,0 +1,57 @@
+name: Build and Deploy PyGame (pygbag)
+
+on:
+  push:
+    paths:
+      - "SpaceShooter/main.py"
+      - "SpaceShooter/assets/**"
+      - ".github/workflows/build.yml"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install pygbag
+        run: pip install pygbag
+
+      - name: Build with pygbag
+        working-directory: ./SpaceShooter
+        run: |
+          # Clean old build
+          rm -rf build dist
+          # Compile to WebAssembly
+          python -m pygbag --build main.py
+
+      - name: Upload artifact (optional, for debugging)
+        uses: actions/upload-artifact@v4
+        with:
+          name: wasm-build
+          path: SpaceShooter/build/
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: wasm-build
+          path: public
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
