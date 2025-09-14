@@ -37,7 +37,7 @@ jobs:
       run: |
         
         # Build the game with pygbag
-        python -m pygbag --build main.py
+        python -m pygbag --build main.py --url https://github.com/Nikiel54/space-shooter-game
         
         # List contents to verify build
         ls -la build/
@@ -48,7 +48,7 @@ jobs:
     - name: Upload artifact
       uses: actions/upload-pages-artifact@v3
       with:
-        path: './build'
+        path: './build/web'
 
   deploy:
     environment:
