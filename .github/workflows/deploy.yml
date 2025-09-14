@@ -37,7 +37,7 @@ jobs:
       run: |
         
         # Build the game with pygbag
-        python -m pygbag --build main.py --url https://github.com/Nikiel54/space-shooter-game
+        python -m pygbag --url https://github.com/Nikiel54/space-shooter-game --build main.py
         
         # List contents to verify build
         ls -la build/
