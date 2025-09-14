@@ -41,6 +41,7 @@ jobs:
         mkdir -p dist
         
         # Build the game with pygbag
+        cd ..
         python -m pygbag main.py --width 800 --height 600 --name "SpaceShooter" --output dist/
         
         # List contents to verify build
